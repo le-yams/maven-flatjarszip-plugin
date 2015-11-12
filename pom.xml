@@ -5,7 +5,7 @@
     <artifactId>flatjarszip-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>FlatJarsZip Maven Plugin</name>
     <description>Allows to creates a zip assembly with project and dependencies jars</description>
