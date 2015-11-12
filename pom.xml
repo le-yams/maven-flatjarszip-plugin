@@ -79,17 +79,19 @@
         </license>
     </licenses>
     
-    <developers>
-        <developer>
-            <id>le-yams</id>
-            <name>Yann D'Isanto</name>
-        </developer>
-    </developers>
+    <url>https://github.com/le-yams/maven-flatjarszip-plugin</url>
     
     <scm>
         <url>https://github.com/le-yams/maven-flatjarszip-plugin</url>
         <connection>scm:git:git://github.com/le-yams/maven-flatjarszip-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:le-yams/maven-flatjarszip-plugin.git</developerConnection>
     </scm>
+    
+    <developers>
+        <developer>
+            <id>le-yams</id>
+            <name>Yann D'Isanto</name>
+        </developer>
+    </developers>
     
 </project>

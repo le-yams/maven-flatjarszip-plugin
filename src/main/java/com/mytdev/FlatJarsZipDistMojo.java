@@ -32,7 +32,7 @@ import org.apache.maven.project.MavenProject;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
 /**
- * Goal which touches a timestamp file.
+ * Goal which execute assembly:assembly.
  * 
  * @requiresDependencyResolution runtime
  */
@@ -72,9 +72,6 @@ public class FlatJarsZipDistMojo extends AbstractMojo {
                 element(name("descriptorRefs"),
                     element(name("descriptorRef"), "flat-jars-zip-assembly")
                 ),
-//                element(name("descriptors"),
-//                    element(name("descriptor"), "flat-jars-zip-assembly")
-//                ),
                 element(name("appendAssemblyId"), "false")
             ),
             executionEnvironment(mavenProject, mavenSession, pluginManager)
