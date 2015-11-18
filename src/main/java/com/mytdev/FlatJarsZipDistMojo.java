@@ -16,6 +16,7 @@ package com.mytdev;
  * limitations under the License.
  */
 import static java.util.Arrays.asList;
+import java.util.ResourceBundle;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
@@ -33,7 +34,7 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
 /**
  * Goal which execute assembly:assembly.
- * 
+ *
  * @requiresDependencyResolution runtime
  */
 @Mojo(name = "flatjarszip", defaultPhase = LifecyclePhase.PACKAGE)
@@ -50,32 +51,38 @@ public class FlatJarsZipDistMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException {
         Plugin assembly = plugin(
-            groupId("org.apache.maven.plugins"),
-            artifactId("maven-assembly-plugin"),
-            version("2.6"),
-            asList(
-                dependency(
-                    "com.mytdev.flatjarszip",
-                    "flatjarszip-assembly-ref",
-                    "1.0.1-SNAPSHOT"
-                )
-            )
+                groupId("org.apache.maven.plugins"),
+                artifactId("maven-assembly-plugin"),
+                version("2.6"),
+                asList(assemblyRefDependency())
         );
         System.out.println(assembly.getDependencies() + " dependencies");
         for (Dependency dependency : assembly.getDependencies()) {
             System.out.println(dependency);
         }
         executeMojo(
-            assembly,
-            goal("assembly"),
-            configuration(
-                element(name("descriptorRefs"),
-                    element(name("descriptorRef"), "flat-jars-zip-assembly")
+                assembly,
+                goal("assembly"),
+                configuration(
+                        element(name("descriptorRefs"),
+                                element(name("descriptorRef"), "flat-jars-zip-assembly")
+                        ),
+                        element(name("appendAssemblyId"), "false")
                 ),
-                element(name("appendAssemblyId"), "false")
-            ),
-            executionEnvironment(mavenProject, mavenSession, pluginManager)
+                executionEnvironment(mavenProject, mavenSession, pluginManager)
         );
+    }
 
+    private Dependency assemblyRefDependency() {
+        ResourceBundle res = ResourceBundle.getBundle(getClass().getName());
+        System.out.printf("assembly-ref dependency: %s %% %s %% %s%n",
+                res.getString("assembly-ref.groupId"),
+                res.getString("assembly-ref.artifactId"),
+                res.getString("assembly-ref.version"));
+        return dependency(
+                res.getString("assembly-ref.groupId"),
+                res.getString("assembly-ref.artifactId"),
+                res.getString("assembly-ref.version")
+        );
     }
 }
